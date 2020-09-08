@@ -1,7 +1,15 @@
 #.:DataProfunda:. 
-#Downloads table from Worldometers.info and makes csv file from it
+#   Coronavirus table extraction.   
+# 1. Downloads coronavirus table from Worldometers.info.
+# 2. Clean raw table.
+# 3. Drop unwanted columns.
+# 4. Drop rows with Nan values.
+# 5. Add CapitalLatitude and  CapitalLongitude do the table.
+# 6. Save table to csv file.
+# 7. Send csv file to ftp server.
 
 #From Page To Csv (FPTC)
+
 from urllib.request import urlopen as uReq       
 from urllib.request import Request        
 from bs4 import BeautifulSoup as soup 
@@ -9,8 +17,9 @@ import numpy as np
 import pandas as pd
 import ftplib
 
-print("Connecting...")
-
+###########################################################################
+#1. Downloads coronavirus table from Worldometers.info.
+###########################################################################
 page_url = 'https://www.worldometers.info/coronavirus/'
 
 req = Request(page_url, headers = {"User-Agent": "Mozilla/5.0"})
@@ -21,10 +30,12 @@ uClient.close()
 
 page_soup = soup(page_html, "html.parser")
 
-
+###########################################################################
+#2. Clean raw table.
+###########################################################################
 print("Analyzing...")
 #Finds table 
-#container[0] is new, container[1] is old
+#Container[0] is new table, container[1] is old
 container = page_soup.findAll("div",{"class":"main_table_countries_div"}) 
 
 new_table = container[0]
@@ -61,8 +72,10 @@ table_done.columns = columns_names
 
 table_done = table_done.reset_index(drop=True)
 
-#Makes LatIng table
-
+###########################################################################
+# 3. Drop unwanted columns.
+# 4. Drop rows with Nan values.
+###########################################################################
 wanted_columns = ['CountryName','TotalCases','NewCases','TotalDeaths','NewDeaths','ActiveCases','Population']
 
 table_concap = pd.read_csv('concap.csv')
@@ -81,7 +94,9 @@ table_ext = table_ext.loc[table_ext["CountryName"] != 'Total:', :]
 
 table_ext = table_ext.reset_index(drop=True)
 
-
+###########################################################################
+#5. Add CapitalLatitude and  CapitalLongitude do the table.
+###########################################################################
 table_ext.loc[:,"CapitalLatitude"] = np.arange(len(table_ext))
 table_ext.loc[:,"CapitalLongitude"] = np.arange(len(table_ext))
 
@@ -91,10 +106,16 @@ for x, value in enumerate(table_ext.iloc[:,0]):
         if(value == value_i):
             table_ext.loc[x,"CapitalLatitude"] = table_concap.loc[i,"CapitalLatitude"]
             table_ext.loc[x,"CapitalLongitude"] = table_concap.loc[i,"CapitalLongitude"]
-
+            
+##########################################################################
+# 6. Save table to csv file.
+##########################################################################
 table_ext.to_csv("concap_ct.csv", index=False)
 
 
+##########################################################################
+# 7. Send csv file to ftp server.
+##########################################################################
 filename = "concap_ct.csv"
 ftp = ftplib.FTP("ftp-adress")
 ftp.login("user","password")
