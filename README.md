@@ -1,5 +1,5 @@
 # FPTC - from page to csv file.
- Scrape table with statistical data about pandemic in each country.   
+ Scrape statistical data about pandemic in each country.   
  Add CapitalLatitude and CapitalLongitude for later display on a map.
  Used page: worldometers.info/coronavirus/.
  Web scrape with BeautifulSoup. 
