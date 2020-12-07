@@ -22,7 +22,7 @@ import ftplib
 ###########################################################################
 page_url = 'https://www.worldometers.info/coronavirus/'
 
-req = Request(page_url, headers = {"User-Agent": "Mozilla/5.0"})
+req = Request(page_url, headers = {"User-Agent": "Mozilla/5.0"}) #Headers are necessary for some page to be scrapped
 
 uClient = uReq(req)
 page_html = uClient.read()
@@ -74,7 +74,6 @@ table_done = table_done.reset_index(drop=True)
 
 ###########################################################################
 # 3. Drop unwanted columns.
-# 4. Drop rows with Nan values.
 ###########################################################################
 wanted_columns = ['CountryName','TotalCases','NewCases','TotalDeaths','NewDeaths','ActiveCases','Population']
 
@@ -87,6 +86,9 @@ table_ext = table_ext.dropna(how='all')
 
 table_ext = table_ext.loc[:,wanted_columns]
 
+###########################################################################
+# 4. Drop rows with Nan values.
+###########################################################################
 #Preprocessing data
 table_ext = table_ext.loc[table_ext["CountryName"].isna() == False, :] 
 table_ext = table_ext.loc[table_ext["CountryName"] != 'World', :] 
@@ -105,17 +107,15 @@ for x, value in enumerate(table_ext.iloc[:,0]):
     for i, value_i in enumerate(table_concap.iloc[:,0]):
         if(value == value_i):
             table_ext.loc[x,"CapitalLatitude"] = table_concap.loc[i,"CapitalLatitude"]
-            table_ext.loc[x,"CapitalLongitude"] = table_concap.loc[i,"CapitalLongitude"]
-            
+            table_ext.loc[x,"CapitalLongitude"] = table_concap.loc[i,"CapitalLongitude"]    
+
 ##########################################################################
-# 6. Save table to csv file.
+# 7a. Save table to csv file
+# 7b.Send csv file to ftp server.
 ##########################################################################
+
 table_ext.to_csv("concap_ct.csv", index=False)
 
-
-##########################################################################
-# 7. Send csv file to ftp server.
-##########################################################################
 filename = "concap_ct.csv"
 ftp = ftplib.FTP("ftp-adress")
 ftp.login("user","password")
