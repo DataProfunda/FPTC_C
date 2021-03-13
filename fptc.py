@@ -115,6 +115,10 @@ for x, value in enumerate(table_ext.iloc[:,0]):
 ##########################################################################
 
 table_ext.to_csv("concap_ct.csv", index=False)
+print(table_ext.head())
+'''
+
+#For sending to other server
 
 filename = "concap_ct.csv"
 ftp = ftplib.FTP("ftp-adress")
@@ -128,5 +132,5 @@ myfile = open(filename, 'rb')
 ftp.storlines('STOR ' + filename, myfile)
 
 ftp.quit()
-
+'''
 print("Success!")
