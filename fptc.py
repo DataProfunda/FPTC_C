@@ -110,12 +110,16 @@ for x, value in enumerate(table_ext.iloc[:,0]):
             table_ext.loc[x,"CapitalLongitude"] = table_concap.loc[i,"CapitalLongitude"]    
 
 ##########################################################################
-# 6a. Save table to csv file
-# 6b.Send csv file to ftp server.
+# 6. Save table to csv file
 ##########################################################################
+
 
 table_ext.to_csv("concap_ct.csv", index=False)
 print(table_ext.head())
+
+##########################################################################
+# 6b.Send csv file to ftp server.
+##########################################################################
 '''
 
 #For sending to other server
