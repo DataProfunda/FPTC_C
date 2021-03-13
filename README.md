@@ -34,7 +34,7 @@ Preprocessing data. <br>
 ![f4](https://user-images.githubusercontent.com/69935274/101418155-7c5ff480-38ed-11eb-9e39-3f724872ce5d.png)
 
 # 5. Add CapitalLatitude and  CapitalLongitude to the table.
-Fill country's data with CapitalLatitude and CapitalLongitude for further placing on the map. <br>
+Fill country's data with CapitalLatitude and CapitalLongitude for further placing them on the map. <br>
 ![f5](https://user-images.githubusercontent.com/69935274/101418166-81bd3f00-38ed-11eb-8cdf-697ec4853f6a.png)
 
 # 6. Outcome
