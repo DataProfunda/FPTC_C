@@ -1,5 +1,9 @@
 # FPTC - from page to csv file.
- Scrape statistical data about pandemic in each country.   
+ I've used BeautifulSoup to scrape data from worldometers.info about coronavirus infection.
+
+ With pandas and numpy we preprocess the data.
+ If we want to show later info on the map, we add CapitalLatitude and  CapitalLongitude to the table.
+
  Add CapitalLatitude and CapitalLongitude for later display on a map.
  Used page: worldometers.info/coronavirus/.
  Web scrape with BeautifulSoup. 
@@ -31,7 +35,7 @@ Table_ext will be final csv file. <br>
 Preprocessing data. <br>
 ![f4](https://user-images.githubusercontent.com/69935274/101418155-7c5ff480-38ed-11eb-9e39-3f724872ce5d.png)
 
-# 5. Add CapitalLatitude and  CapitalLongitude do the table.
+# 5. Add CapitalLatitude and  CapitalLongitude to the table.
 Fill country's data with CapitalLatitude and CapitalLongitude for further placing on the map. <br>
 ![f5](https://user-images.githubusercontent.com/69935274/101418166-81bd3f00-38ed-11eb-8cdf-697ec4853f6a.png)
 
