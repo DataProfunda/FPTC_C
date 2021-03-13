@@ -40,7 +40,7 @@ Fill country's data with CapitalLatitude and CapitalLongitude for further placin
 ![f5](https://user-images.githubusercontent.com/69935274/101418166-81bd3f00-38ed-11eb-8cdf-697ec4853f6a.png)
 
 # 6. Outcome
-'concap_ct.csv' should be created. <br>
+If everything went fine 'concap_ct.csv' file should be created. <br>
 Table should look like this. <br>
 ![table head](https://user-images.githubusercontent.com/69935274/111017022-5f860200-83b1-11eb-93cd-b48cccbd5a4b.png)
 
